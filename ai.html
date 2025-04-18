@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Chat - WileCraft</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: radial-gradient(ellipse at center, #0c0c2c 0%, #000000 100%);
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 20px;
+    }
+
+    .chat-container {
+      max-width: 600px;
+      margin: 80px auto 20px;
+      background-color: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+
+    .chat-box {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+      padding-right: 10px;
+    }
+
+    .chat-message {
+      margin-bottom: 12px;
+    }
+
+    .user {
+      color: #00ff99;
+    }
+
+    .bot {
+      color: #00bfff;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .btn-kembali {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-family: 'Minecraftia', sans-serif;
+      color: white;
+      border: 2px solid white;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 10px;
+      background: transparent;
+      transition: 0.3s ease;
+    }
+
+    .btn-kembali:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 10px white;
+    }
+
+    a {
+      color: #00ffdd;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="btn-kembali">⬅ Kembali</a>
+
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox">
+      <div class="chat-message bot">Halo! Saya WileAi. Saya siap bantu kamu seputar produk Minecraft dari WileCraft 😎</div>
+      <div class="chat-message bot">
+        🔹 Apa itu akun Java Edition?<br>
+        🔹 Beda Bedrock & Java?<br>
+        🔹 Bisa main di PojavLauncher?<br>
+        🔹 Cara beli produk?<br>
+        🔹 Harga akun?<br>
+        🔹 Aman nggak?<br>
+        🔹 Custom Skin bisa pakai gambar apa aja?<br>
+        🔹 Apa ada garansi?<br>
+        🔹 Panel bot WA durasinya?<br>
+        🔹 Bisa refund?<br>
+        🔹 Hubungi admin WA kalau perlu bantuan lanjutan.
+      </div>
+    </div>
+    <input type="text" id="userInput" placeholder="Ketik pertanyaanmu di sini..."/>
+  </div>
+
+  <script>
+    const userInput = document.getElementById("userInput");
+    const chatBox = document.getElementById("chatBox");
+
+    userInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        const userText = userInput.value.trim();
+        if (userText === "") return;
+
+        appendMessage("user", userText);
+        userInput.value = "";
+
+        let botResponse = "";
+        const text = userText.toLowerCase();
+
+        if (text.includes("java")) {
+          botResponse = "Akun Java Edition adalah versi resmi Minecraft yang dimainkan di PC/laptop. Bisa login pakai launcher resmi, TLauncher, atau bahkan Pojav kalau kamu di Android.";
+        } else if (text.includes("bedrock")) {
+          botResponse = "Bedrock Edition biasanya dimainkan di HP Android/iOS dan Windows 10. Tidak bisa connect dengan Java server.";
+        } else if (text.includes("pojav")) {
+          botResponse = "Kamu bisa main Minecraft Java di Android pakai PojavLauncher. Tapi pastikan beli akun yang versi 45K biar bisa login penuh. 😉";
+        } else if (text.includes("beli") || text.includes("order")) {
+          botResponse = "Gampang! Tinggal klik tombol TOKO di halaman utama, pilih produk, lalu klik tombol 'Pesan Sekarang' buat chat langsung ke WhatsApp admin.";
+        } else if (text.includes("harga")) {
+          botResponse = "Harga akun bervariasi:\n- Akun Java + Bedrock PC : Diskon dari 185k - 170k - java pojav launcher diskon dari 60k jadi 45k\n- Skin Custom: 5K - 15K\n- Render 3D: 10K";
+        } else if (text.includes("aman") || text.includes("penipuan")) {
+          botResponse = "Aman banget! Kita sudah handle ratusan pesanan dan punya testimoni asli dari pembeli. Bisa dicek langsung di website.";
+        } else if (text.includes("skin") || text.includes("custom")) {
+          botResponse = "Bisa custom skin dari gambar apa pun: karakter anime, real life, game, atau bahkan foto kamu sendiri! Langsung kirim referensinya yaa~";
+        } else if (text.includes("garansi")) {
+          botResponse = "Tenang, akun Java & Bedrock kami bergaransi SELAMANYA selama login wajar. Kalau panel bot WhatsApp, garansi 1 bulan.";
+        } else if (text.includes("panel") || text.includes("bot")) {
+          botResponse = "Panel bot WA tersedia dan aktif selama 1 bulan penuh. Cocok buat toko atau komunitas kamu.";
+        } else if (text.includes("refund")) {
+          botResponse = "Refund bisa dilakukan kalau ada masalah dari sistem kami. Jangan ragu chat admin ya.";
+        } else if (text.includes("masalah") || text.includes("login")) {
+          botResponse = "Kalau ada kendala login atau akun, langsung hubungi admin ya biar dibantu: 📞 <a href='https://wa.me/6282287752416' target='_blank'>Klik di sini</a>";
+        } else {
+          botResponse = "Lu Nanya Ga Sesuai Ama list, kalau penting atau binggung ke nomor admin will aja ya 😊<br>📞 <a href='https://wa.me/6282287752416' target='_blank'>Klik di sini</a>";
+        }
+
+        appendMessage("bot", botResponse);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    });
+
+    function appendMessage(sender, message) {
+      const div = document.createElement("div");
+      div.className = "chat-message " + sender;
+      div.innerHTML = message;
+      chatBox.appendChild(div);
+    }
+  </script>
+</body>
+</html>
